@@ -11,9 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set git user config
-        uses: fregante/setup-git-user@v1
-
       - name: Setup npm
         uses: actions/setup-node@v3
         with:
