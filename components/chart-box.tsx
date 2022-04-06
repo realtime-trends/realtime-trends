@@ -50,7 +50,7 @@ const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
 
   return (
     // eslint-disable-next-line max-len
-    <div className={'bg-white max-w-xl mx-auto p-8 md:p-12 rounded-lg ' + (isNaverSection ? 'md:shadow-2xl my-0 md:my-10' : 'shadow-2xl my-10')}>
+    <div className={'bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg ' + (isNaverSection ? 'md:shadow-2xl my-0 md:my-10' : 'shadow-2xl my-10')}>
       <section>
         <div className='flex justify-between items-center'>
           <div>
@@ -116,29 +116,31 @@ const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
       </section>
 
       <section className="mt-10 text-lg font-bold">
-        <div className="grid grid-cols-3 p-2 md:hover:bg-blue-300"
-          onClick={() => {
-            try {
-              window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-            } catch {} finally {
-              window.Kakao.Link.sendCustom({
-                templateId: 74677,
-              });
-            }
-          }}>
-          <div className='flex justify-center items-center'><Image src="/kakaotalk.svg" height={48} width={48} /></div>
-          <div className='col-span-2 flex justify-center items-center'>카카오톡 공유</div>
+        <div className="grid grid-cols-2">
+          <div className="grid grid-cols-3 p-2 md:hover:bg-blue-300"
+            onClick={() => {
+              try {
+                window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+              } catch {} finally {
+                window.Kakao.Link.sendCustom({
+                  templateId: 74677,
+                });
+              }
+            }}>
+            <div className='flex justify-center items-center'><Image src="/kakaotalk.svg" height={48} width={48} /></div>
+            <div className='col-span-2 flex justify-center items-center'>카카오톡 공유</div>
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 p-2 md:hover:bg-blue-300"
+            onClick={() => {
+              window.open('https://chrome.google.com/webstore/detail/dmbaagbmhlhdnlmbcncneijndejlalie');
+            }}>
+            <div className='flex justify-center items-center'><Image src="/chromewebstore.svg" height={48} width={48} /></div>
+            <div className='col-span-2 flex justify-center items-center'>확장 프로그램 설치</div>
+          </div>
+          {loaded ? <div className="flex p-2 md:hidden justify-center items-center md:hover:bg-blue-300">
+            <div className="nv-openmain" data-title="실시간검색어" data-type="W2"></div>
+          </div> : ''}
         </div>
-        <div className="hidden md:grid md:grid-cols-3 p-2 md:hover:bg-blue-300"
-          onClick={() => {
-            window.open('https://chrome.google.com/webstore/detail/dmbaagbmhlhdnlmbcncneijndejlalie');
-          }}>
-          <div className='flex justify-center items-center'><Image src="/chromewebstore.svg" height={48} width={48} /></div>
-          <div className='col-span-2 flex justify-center items-center'>확장 프로그램 설치</div>
-        </div>
-        {loaded ? <div className="flex p-2 md:hidden justify-center items-center md:hover:bg-blue-300">
-          <div className="nv-openmain" data-title="실시간검색어" data-type="W2"></div>
-        </div> : ''}
       </section>
     </div>
   );
