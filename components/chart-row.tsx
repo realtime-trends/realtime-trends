@@ -29,11 +29,11 @@ function ChartRow({trend, ranking, bold}: propTypes) {
                                  <TrendingUpIcon className='h-5 w-5 text-orange-500'/>
                              ) : trend.delta > 0 ? (
                                 <>
-                                  <ArrowUpIcon className='h-4 w-4 text-blue-500'/>
+                                  <ArrowUpIcon className='h-4 w-4 text-red-500'/>
                                   {Math.abs(trend.delta)}</>
                              ) : trend.delta < 0 ? (
                                 <>
-                                  <ArrowDownIcon className='h-4 w-4 text-red-500'
+                                  <ArrowDownIcon className='h-4 w-4 text-blue-500'
                                   />
                                   {Math.abs(trend.delta)}</>
                              ) : (
