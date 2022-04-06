@@ -116,7 +116,7 @@ const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
       </section>
 
       <section className="mt-10 text-lg font-bold">
-        <div className="grid grid-cols-2">
+        <div className="grid md:grid-cols-2">
           <div className="grid grid-cols-3 p-2 md:hover:bg-blue-300"
             onClick={() => {
               try {
