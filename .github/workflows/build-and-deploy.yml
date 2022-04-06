@@ -29,9 +29,15 @@ jobs:
           npm run export
 
       - name: Push to gh-pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
-        with:
-          branch: gh-pages
-          folder: out
-          token: ${{secrets.GITHUB_TOKEN}}
-          clean: true
+        run: |
+          touch out/.nojekyll
+          git config --global user.name 'Changho Park'
+          git config --global user.email 'hoya.develop@gmail.com'
+          git add -f out/
+          git checkout -b temp-for-deploy-gh-pages
+          git commit -m "Deploy Next.js to gh-pages"
+          git subtree split --prefix out -b gh-pages
+          git push -f origin gh-pages:gh-pages
+          git branch -D gh-pages
+          git checkout main
+          git branch -D temp-for-deploy-gh-pages
