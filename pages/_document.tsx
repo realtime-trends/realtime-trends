@@ -9,7 +9,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-          <meta name="google-site-verification" content="54SG3TNIx0BzNeZ1-XFsHzAM09nR1-K4X1_MjwaXLDY" />
+          <meta name="google-site-verification" content="wNBO74d0veQz9o6UYxEbLs7o_cHkeafkF9pKpShKaYA" />
         </Head>
         <body>
           <Main />
