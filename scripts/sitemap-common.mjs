@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-const fs = require('fs');
-const globby = require('globby');
-const prettier = require('prettier');
+import fs from 'fs';
+import globby from 'globby';
+import prettier from 'prettier';
 
 const getDate = new Date().toISOString();
 
