@@ -29,10 +29,10 @@ jobs:
           rm -rf public/sitemap
           mkdir -p public/sitemap
           cd scripts/
-          node ./sitemap-common.js
-          node ./sitemap-posts.js
-          node ./compress-sitemap.js
-          node ./sitemap.js
+          node ./sitemap-common.mjs
+          node ./sitemap-posts.mjs
+          node ./compress-sitemap.mjs
+          node ./sitemap.mjs
           cd ..
           npm run export
 
