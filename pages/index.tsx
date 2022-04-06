@@ -54,8 +54,6 @@ const Home: NextPage<propsType> = ({trends}: propsType) => {
 Home.getInitialProps = async () => {
   const res = await axios.get('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json');
   const data: object = await res.data;
-  console.log('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json');
-  console.log(data);
   if (data) {
     // eslint-disable-next-line max-len
     const latestTimeStamp = Math.max.apply(null, data['timestamps' as keyof object]);
