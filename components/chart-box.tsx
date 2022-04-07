@@ -60,14 +60,14 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
         <div className='flex justify-between items-center'>
           <div className='flex justify-center items-center'>
             <h4 className="font-bold text-2xl">급상승 검색어</h4>
-            <RefreshIcon onClick={() => reload()} width={32} height={32} className='bg-gray-300 rounded-full fill-white ml-3 p-1'/>
+            <RefreshIcon onClick={() => reload()} width={32} height={32} className='bg-gray-300 rounded-full fill-white ml-3 p-1 hover:bg-blue-300'/>
           </div>
         </div>
       </section>
 
       <section className="mt-10">
-        <div className="grid md:grid-cols-2">
-          <div className="grid grid-rows-5 ">
+        <div className="grid md:grid-cols-2 md:gap-5 divide-y md:divide-y-0">
+          <div className="grid grid-rows-5 divide-y">
             {trends?.slice(0, 5).map((trend: Trend, index: number) => {
               return (
                 <div
@@ -88,7 +88,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
               );
             })}
           </div>
-          <div className="grid grid-rows-5">
+          <div className="grid grid-rows-5 divide-y border-y">
             {trends?.slice(5, 10).map((trend: Trend, index: number) => {
               index += 5;
               return (
