@@ -6,7 +6,10 @@ import Head from 'next/head';
 import ChartBox from '../components/chart-box';
 import axios from 'axios';
 import Trend from '../models/trend';
+import * as cheerio from 'cheerio';
 import {useRouter} from 'next/router';
+import Article from '../models/article';
+import ChartNewsList from '../components/chart-news-list';
 interface PropsType {
   trends: Trend[]
 }
@@ -17,7 +20,11 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   const {napp} = router.query;
 
   if (napp && napp == 'mysection') {
-    return (<ChartBox trends={trends} isNaverSection={true} reload={router.reload}/>);
+    return (
+      <main>
+        <ChartBox trends={trends} isNaverSection={true} reload={router.reload} />
+        <ChartNewsList trends={trends} isNaverSection={true} />
+      </main>);
   }
 
   return (
@@ -30,21 +37,9 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
       </Head>
 
       <main>
-        <ChartBox trends={trends} isNaverSection={false} reload={router.reload}/>
+        <ChartBox trends={trends} isNaverSection={false} reload={router.reload} />
+        <ChartNewsList trends={trends} isNaverSection={false} />
       </main>
-
-      {/* <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer> */}
     </div>
   );
 };
@@ -56,6 +51,20 @@ Home.getInitialProps = async () => {
     // eslint-disable-next-line max-len
     const latestTimeStamp = Math.max.apply(null, data['timestamps' as keyof object]);
     const trends : Trend[] = data[latestTimeStamp as keyof object];
+    await Promise.all(trends.map(async (trend, index) => {
+      const url = 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=' + encodeURIComponent(trend.keyword);
+      const res = await axios.get(url);
+      const $ = cheerio.load(await res.data);
+      const topArticles : Article[] = $('ul.list_news > li').filter((index) => index < 3).map((_index, item) => {
+        return {
+          title: $(item).find('a.news_tit').attr('title') || '',
+          link: $(item).find('a.news_tit').attr('href') || '',
+          content: $(item).find('a.api_txt_lines.dsc_txt_wrap').text(),
+          thumnail: $(item).find('img.thumb.api_get').attr('src') || '',
+        };
+      }).toArray();
+      trends[index].topArticles = topArticles;
+    }));
     return {
       trends: trends,
     };
