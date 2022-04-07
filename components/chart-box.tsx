@@ -44,8 +44,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
 
 
   return (
-    // eslint-disable-next-line max-len
-    <div className={'bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg ' + (isNaverSection ? 'md:shadow-2xl my-0 md:my-10' : 'shadow-2xl my-10')}>
+    <div>
       <section>
         <div className='flex justify-end items-center'>
           <div className="form-check form-switch">

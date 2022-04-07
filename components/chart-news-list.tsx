@@ -6,13 +6,12 @@ import AriticleBox from './article-box';
 
 
 interface PropsType {
-    trends: Trend[],
-    isNaverSection: boolean,
+    trends: Trend[]
 }
 
-const ChartNewsList = ({trends, isNaverSection}: PropsType) => {
+const ChartNewsList = ({trends}: PropsType) => {
   return (
-    <div className={'bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg ' + (isNaverSection ? 'md:shadow-2xl my-0 md:my-10' : 'shadow-2xl my-10')}>
+    <section className='mt-10'>
       <h4 className="font-bold text-2xl">키워드별 관련 뉴스</h4>
       {trends && trends.slice(0, 10).map((trend, index) => {
         return (
@@ -33,7 +32,7 @@ const ChartNewsList = ({trends, isNaverSection}: PropsType) => {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 };
 

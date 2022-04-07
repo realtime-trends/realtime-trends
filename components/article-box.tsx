@@ -10,20 +10,22 @@ interface PropsType {
 const AriticleBox = ({article} : PropsType) => {
   return (
     <div
-      className="grid grid-cols-5 grid-rows-3 grid-flow-col p-3 gap-x-5 gap-y-1 md:hover:bg-blue-300"
+      className="grid grid-cols-5 grid-rows-5 grid-flow-col p-3 gap-x-5 gap-y-1 md:hover:bg-blue-300"
       onClick={() => {
         window.open(article.link);
       }}
     >
-      <div className="col-span-4 font-bold text-blue-800 truncate">
-        {article.title}
+      <div className="col-span-4 row-span-2 font-bold text-blue-800">
+        <p className='line-clamp-2'>
+          {article.title}
+        </p>
       </div>
-      <div className="col-span-4 row-span-2 text-gray-300 text-sm">
-        <p className=' line-clamp-2'>
+      <div className="col-span-4 row-span-3 text-gray-400 text-sm">
+        <p className='line-clamp-3'>
           {article.content}
         </p>
       </div>
-      <div className="row-span-3 flex justify-center items-center">
+      <div className="row-span-5 flex justify-center items-center">
         <Image src={article.thumnail} width={300} height={200} />
       </div>
     </div>

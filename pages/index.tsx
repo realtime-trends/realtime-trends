@@ -21,7 +21,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
 
   if (napp && napp == 'mysection') {
     return (
-      <main>
+      <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg md:shadow-2xl my-0 md:my-10'>
         <ChartBox trends={trends} isNaverSection={true} reload={router.reload} />
         <ChartNewsList trends={trends} isNaverSection={true} />
       </main>);
@@ -36,9 +36,9 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg shadow-2xl my-10'>
         <ChartBox trends={trends} isNaverSection={false} reload={router.reload} />
-        <ChartNewsList trends={trends} isNaverSection={false} />
+        <ChartNewsList trends={trends} />
       </main>
     </div>
   );
