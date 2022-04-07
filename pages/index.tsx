@@ -17,7 +17,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   const {napp} = router.query;
 
   if (napp && napp == 'mysection') {
-    return (<ChartBox trends={trends} isNaverSection={true}/>);
+    return (<ChartBox trends={trends} isNaverSection={true} reload={router.reload}/>);
   }
 
   return (
@@ -30,7 +30,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
       </Head>
 
       <main>
-        <ChartBox trends={trends} isNaverSection={false}/>
+        <ChartBox trends={trends} isNaverSection={false} reload={router.reload}/>
       </main>
 
       {/* <footer className={styles.footer}>
