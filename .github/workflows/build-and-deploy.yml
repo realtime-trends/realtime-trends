@@ -30,7 +30,6 @@ jobs:
           mkdir -p public/sitemap
           cd scripts/
           node ./sitemap-common.mjs
-          node ./sitemap-posts.mjs
           node ./compress-sitemap.mjs
           node ./sitemap.mjs
           cd ..
