@@ -23,7 +23,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
     return (
       <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg md:shadow-2xl my-0 md:my-10'>
         <ChartBox trends={trends} isNaverSection={true} reload={router.reload} />
-        <ChartNewsList trends={trends} isNaverSection={true} />
+        <ChartNewsList trends={trends} />
       </main>);
   }
 
