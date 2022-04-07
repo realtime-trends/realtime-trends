@@ -4,6 +4,7 @@ module.exports = {
   reactStrictMode: true,
   images: {
     loader: 'akamai',
-    path: '/',
+    path: '',
+    domains: ['search.pstatic.net'],
   },
 };
