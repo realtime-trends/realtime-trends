@@ -7,12 +7,12 @@ import ChartBox from '../components/chart-box';
 import axios from 'axios';
 import Trend from '../models/trend';
 import {useRouter} from 'next/router';
-interface propsType {
+interface PropsType {
   trends: Trend[]
 }
 
 
-const Home: NextPage<propsType> = ({trends}: propsType) => {
+const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   const router = useRouter();
   const {napp} = router.query;
 

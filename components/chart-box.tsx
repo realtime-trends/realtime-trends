@@ -3,7 +3,9 @@ import Image from 'next/image';
 import React, {useEffect, useState} from 'react';
 import Trend from '../models/trend';
 import ChartRow from './chart-row';
-import loadOpenmain from '../scripts/loadopenmain';
+import ExtensionDownloadButton from './extension-download-button';
+import KakaotalkShareButton from './kakaotalk-share-button';
+import NaverOpenmainButton from './naver-openmain-button';
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -12,7 +14,7 @@ declare global {
   }
 }
 
-interface propsType {
+interface PropsType {
   trends: Trend[],
   isNaverSection: boolean
 }
@@ -27,10 +29,9 @@ interface propsType {
  * )
  * @return {JSX.Element}
  */
-const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
-  const [isNaver, setIsNaver] = useState(true);
+const ChartBox = ({trends, isNaverSection}: PropsType): JSX.Element => {
+  const [isNaver, setIsNaver] = useState(isNaverSection);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loaded, setLoaded] = useState(false);
 
 
   useEffect(()=>{
@@ -40,13 +41,6 @@ const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    loadOpenmain(() => {
-      if (!isNaverSection) {
-        setLoaded(true);
-      }
-    });
-  });
 
   return (
     // eslint-disable-next-line max-len
@@ -115,31 +109,11 @@ const ChartBox = ({trends, isNaverSection}: propsType): JSX.Element => {
         </div>
       </section>
 
-      <section className="mt-10 text-lg font-bold">
+      <section className="mt-10">
         <div className="grid md:grid-cols-2">
-          <div className="grid grid-cols-3 p-2 md:hover:bg-blue-300"
-            onClick={() => {
-              try {
-                window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
-              } catch {} finally {
-                window.Kakao.Link.sendCustom({
-                  templateId: 74677,
-                });
-              }
-            }}>
-            <div className='flex justify-center items-center'><Image src="/kakaotalk.svg" height={48} width={48} /></div>
-            <div className='col-span-2 flex justify-center items-center'>카카오톡 공유</div>
-          </div>
-          <div className="hidden md:grid md:grid-cols-3 p-2 md:hover:bg-blue-300"
-            onClick={() => {
-              window.open('https://chrome.google.com/webstore/detail/dmbaagbmhlhdnlmbcncneijndejlalie');
-            }}>
-            <div className='flex justify-center items-center'><Image src="/chromewebstore.svg" height={48} width={48} /></div>
-            <div className='col-span-2 flex justify-center items-center'>확장 프로그램 설치</div>
-          </div>
-          {loaded ? <div className="flex p-2 md:hidden justify-center items-center md:hover:bg-blue-300">
-            <div className="nv-openmain" data-title="실시간검색어" data-type="W2"></div>
-          </div> : ''}
+          <KakaotalkShareButton/>
+          <ExtensionDownloadButton/>
+          <NaverOpenmainButton isNaverSection={isNaverSection}/>
         </div>
       </section>
     </div>
