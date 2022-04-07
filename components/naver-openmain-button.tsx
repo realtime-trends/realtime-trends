@@ -4,6 +4,7 @@ import React, {useEffect} from 'react';
 import {useState} from 'react';
 import loadOpenmain from '../scripts/loadopenmain';
 
+
 interface PropsType {
     isNaverSection: boolean
 }
@@ -22,7 +23,6 @@ const NaverOpenmainButton = function({isNaverSection}: PropsType) {
           if (hiddenOpenmainElement) {
             const openmainDiv = hiddenOpenmainElement.getElementsByTagName('div')[0];
             if (openmainDiv) {
-              console.log(openmainDiv);
               setElementLoaded(true);
             }
           }
@@ -41,7 +41,9 @@ const NaverOpenmainButton = function({isNaverSection}: PropsType) {
         }}>
           <div className='flex justify-start items-center'><Image src="/naver.svg" height={32} width={32} /></div>
           <div className='col-span-4 flex justify-end items-center'>
-            네이버 메인에&nbsp;<span className='text-green-500'>#실시간검색어</span>&nbsp;추가
+            <span>
+              네이버 메인에&nbsp;<span className='text-green-500'>#실시간검색어</span>&nbsp;추가
+            </span>
           </div>
         </div>
       </>

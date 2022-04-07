@@ -17,8 +17,8 @@ const KakaotalkShareButton = () => {
       <div className='flex justify-start items-center'>
         <Image src="/kakaotalk.svg" height={32} width={32} />
       </div>
-      <div className='col-span-4 flex justify-end items-center'>
-        카카오톡으로&nbsp;<span className='text-yellow-700'>#실시간검색어</span>&nbsp;공유
+      <div className='col-span-4 flex justify-end items-center break-normal'>
+        <span>카카오톡으로&nbsp;<span className='text-yellow-700'>#실시간검색어</span>&nbsp;공유</span>
       </div>
     </div>
   );

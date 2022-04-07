@@ -12,7 +12,9 @@ const ExtensionDownloadButton = () => {
         <Image src="/chromewebstore.svg" height={48} width={48} />
       </div>
       <div className='col-span-4 flex justify-end items-center'>
+        <span>
           브라우저에&nbsp;<span className='text-red-500'>#실시간검색어</span>&nbsp;설치
+        </span>
       </div>
     </div>);
 };
