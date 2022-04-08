@@ -9,7 +9,22 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-          <meta name="google-site-verification" content="wNBO74d0veQz9o6UYxEbLs7o_cHkeafkF9pKpShKaYA" />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+          page_path: window.location.pathname,
+        });
+      `,
+            }}
+          />
         </Head>
         <body>
           <Main />
