@@ -4,3 +4,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  package = "@netlify/plugin-sitemap"
+
+  [plugins.inputs]
+  buildDir = "public"
