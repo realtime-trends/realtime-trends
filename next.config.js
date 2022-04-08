@@ -7,4 +7,5 @@ module.exports = {
     path: '',
     domains: ['search.pstatic.net'],
   },
+  target: 'serverless',
 };
