@@ -11,7 +11,7 @@ interface PropsType {
 
 const ChartNewsList = ({trends}: PropsType) => {
   return (
-    <section className='mt-10'>
+    <section className=''>
       <h4 className="font-bold text-2xl">키워드별 관련 뉴스</h4>
       {trends && trends.slice(0, 10).map((trend, index) => {
         return (
@@ -20,7 +20,7 @@ const ChartNewsList = ({trends}: PropsType) => {
               <div className="flex justify-center items-center text-sm font-semibold p-2">{index + 1}</div>
               <div className="col-span-2 flex justify-center items-center text-sm font-semibold p-2">{trend.keyword}</div>
             </div>
-            <div className='md:col-span-4 grid grid-rows-3 divide-y'>
+            <div className={`md:col-span-4 grid grid-rows-${trend.topArticles.length} divide-y`}>
               {trend.topArticles && trend.topArticles.map((topArticle, index) => {
                 return (
                   <div key={index}>

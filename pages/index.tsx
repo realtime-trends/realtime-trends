@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import type {NextPage} from 'next';
+import type {GetServerSideProps, NextPage} from 'next';
 import Head from 'next/head';
 
 import ChartBox from '../components/chart-box';
@@ -44,7 +44,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   );
 };
 
-Home.getInitialProps = async () => {
+export const getServerSideProps:GetServerSideProps<PropsType> = async ()=> {
   const res = await axios.get('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json');
   const data: object = await res.data;
   if (data) {
@@ -66,11 +66,11 @@ Home.getInitialProps = async () => {
       trends[index].topArticles = topArticles;
     }));
     return {
-      trends: trends,
+      props: {trends: trends},
     };
   } else {
     return {
-      trends: [],
+      props: {trends: []},
     };
   }
 };
