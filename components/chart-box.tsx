@@ -21,6 +21,19 @@ interface PropsType {
   reload: Function
 }
 
+const searchEngines = [
+  {
+    name: 'Google',
+    logo: './google.svg',
+    searchUrl: 'https://www.google.com/search?q=',
+  },
+  {
+    name: 'Naver',
+    logo: './naver.svg',
+    searchUrl: 'https://search.naver.com/search.naver?query=',
+  },
+];
+
 /**
  * ChartBox for web.
  *
@@ -32,8 +45,8 @@ interface PropsType {
  * @return {JSX.Element}
  */
 const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
-  const [isNaver, setIsNaver] = useState(isNaverSection);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [searchEngine, setSearchEngine] = useState(isNaverSection ? 1 : 0);
 
   useEffect(()=>{
     const interval = setInterval(()=>{
@@ -46,20 +59,21 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
   return (
     <div>
       <section>
-        <div className='flex justify-end items-center'>
-          <div className="form-check form-switch">
-            <label className="relative flex justify-between items-center p-2 text-xl">
-              <Image src="/google.svg" alt="Google logo" width={24} height={24} />
-              <input type="checkbox" className="absolute left-1/2 -translate-x-1/2 w-full h-full peer appearance-none rounded-md" defaultChecked={isNaver} onClick={() => setIsNaver((v) => !v)}/>
-              <span className="w-14 h-6 flex items-center flex-shrink-0 mx-2 p-1 bg-gray-300 rounded-full duration-300 ease-in-out peer-checked:bg-green-500 after:w-4 after:h-4 after:bg-white after:rounded-full after:shadow-md after:duration-300 peer-checked:after:translate-x-8"></span>
-              <Image src="/naver.svg" alt="Naver logo" width={24} height={24} />
-            </label>
-          </div>
-        </div>
         <div className='flex justify-between items-center'>
           <div className='flex justify-center items-center'>
             <h4 className="font-bold text-2xl">급상승 검색어</h4>
             <RefreshIcon onClick={() => reload()} width={32} height={32} className='bg-gray-300 rounded-full fill-white ml-3 p-1 hover:bg-blue-300'/>
+          </div>
+          <div
+            className='items-center text-center'
+            onClick={() => {
+              setSearchEngine((searchEngine + 1)%searchEngines.length);
+            }}
+          >
+            <div className="text-xs font-bold text-gray-400 mb-1">
+              검색엔진
+            </div>
+            <Image src={searchEngines[searchEngine].logo} alt={searchEngines[searchEngine].name} width={32} height={32} />
           </div>
         </div>
       </section>
@@ -75,11 +89,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
                   style={{flexGrow: 1, height: '100%'}}
                   onClick={() => {
                     const encodedKeyword = encodeURI(trend.keyword);
-                    if (isNaver) {
-                      window.open('https://search.naver.com/search.naver?query=' + encodedKeyword);
-                    } else {
-                      window.open('https://www.google.com/search?q=' + encodedKeyword);
-                    }
+                    window.open(searchEngines[searchEngine].searchUrl + encodedKeyword);
                   }}
                 >
                   <ChartRow trend={trend} ranking={index + 1} bold={index == activeIndex}/>
@@ -97,11 +107,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
                   style={{flexGrow: 1, height: '100%'}}
                   onClick={() => {
                     const encodedKeyword = encodeURI(trend.keyword);
-                    if (isNaver) {
-                      window.open('https://search.naver.com/search.naver?query=' + encodedKeyword);
-                    } else {
-                      window.open('https://www.google.com/search?q=' + encodedKeyword);
-                    }
+                    window.open(searchEngines[searchEngine].searchUrl + encodedKeyword);
                   }}
                 >
                   <ChartRow trend={trend} ranking={index + 1} bold={index == activeIndex}/>
@@ -116,9 +122,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
         <div className="grid md:grid-cols-2 font-bold text-sm md:text-base">
           <KakaotalkShareButton/>
           <ExtensionDownloadButton/>
-          {
-            isNaverSection ? <></> : <NaverOpenmainButton/>
-          }
+          <NaverOpenmainButton isNaverSection={isNaverSection} />
         </div>
       </section>
     </div>
