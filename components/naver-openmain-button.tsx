@@ -8,16 +8,18 @@ const NaverOpenmainButton = function() {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    loadOpenmain(() => {
-      const hiddenOpenmainElement = document.getElementById('hidden-openmain');
-      if (hiddenOpenmainElement) {
-        const openmainDiv = hiddenOpenmainElement.getElementsByTagName('div')[0];
-        if (openmainDiv) {
-          setScriptLoaded(true);
+    if (!scriptLoaded) {
+      loadOpenmain(() => {
+        const hiddenOpenmainElement = document.getElementById('hidden-openmain');
+        if (hiddenOpenmainElement) {
+          const openmainDiv = hiddenOpenmainElement.getElementsByTagName('div')[0];
+          if (openmainDiv) {
+            setScriptLoaded(true);
+          }
         }
-      }
-    });
-  }, [scriptLoaded]);
+      });
+    }
+  });
 
   return (
     <>
