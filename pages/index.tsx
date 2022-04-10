@@ -6,9 +6,7 @@ import Head from 'next/head';
 import ChartBox from '../components/chart-box';
 import axios from 'axios';
 import Trend from '../models/trend';
-import * as cheerio from 'cheerio';
 import {useRouter} from 'next/router';
-import Article from '../models/article';
 import ChartNewsList from '../components/chart-news-list';
 interface PropsType {
   trends: Trend[]
