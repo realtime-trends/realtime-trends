@@ -5,5 +5,5 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[functions."test-function"]
+[functions."run-updater-ga"]
   schedule = "*/5 * * * *"
