@@ -3,7 +3,7 @@ import {Handler} from '@netlify/functions';
 import {Octokit} from '@octokit/core';
 
 const handler: Handler = async (event, context) => {
-  const octokit = new Octokit();
+  const octokit = new Octokit({auth: process.env.OCTOKIT_GITHUB_TOKEN});
 
   await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
     owner: 'realtime-trends',
