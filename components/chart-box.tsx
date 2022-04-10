@@ -116,7 +116,9 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
         <div className="grid md:grid-cols-2 font-bold text-sm md:text-base">
           <KakaotalkShareButton/>
           <ExtensionDownloadButton/>
-          <NaverOpenmainButton isNaverSection={isNaverSection}/>
+          {
+            isNaverSection ? <></> : <NaverOpenmainButton/>
+          }
         </div>
       </section>
     </div>

@@ -16,14 +16,7 @@ interface PropsType {
 const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   const router = useRouter();
   const {napp} = router.query;
-
-  if (napp && napp == 'mysection') {
-    return (
-      <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg md:shadow-2xl my-0 md:my-10'>
-        <ChartBox trends={trends} isNaverSection={true} reload={router.reload} />
-        <ChartNewsList trends={trends} />
-      </main>);
-  }
+  const isNaverSection = Boolean(napp && napp == 'mysection');
 
   return (
     <div className='body-bg min-h-screen md:pt-20 pb-6 px-2 md:px-0 pt-12'>
@@ -34,8 +27,8 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg shadow-2xl my-10'>
-        <ChartBox trends={trends} isNaverSection={false} reload={router.reload} />
+      <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg md:shadow-2xl my-0 md:my-10'>
+        <ChartBox trends={trends} isNaverSection={isNaverSection} reload={router.reload} />
         <ChartNewsList trends={trends} />
       </main>
     </div>

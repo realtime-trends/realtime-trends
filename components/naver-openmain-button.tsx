@@ -4,29 +4,20 @@ import React, {useEffect} from 'react';
 import {useState} from 'react';
 import loadOpenmain from '../scripts/loadopenmain';
 
-
-interface PropsType {
-    isNaverSection: boolean
-}
-
-const NaverOpenmainButton = function({isNaverSection}: PropsType) {
+const NaverOpenmainButton = function() {
   const [scriptLoaded, setScriptLoaded] = useState(false);
 
   useEffect(() => {
-    if (!scriptLoaded) {
-      loadOpenmain(() => {
-        if (!isNaverSection) {
-          const hiddenOpenmainElement = document.getElementById('hidden-openmain');
-          if (hiddenOpenmainElement) {
-            const openmainDiv = hiddenOpenmainElement.getElementsByTagName('div')[0];
-            if (openmainDiv) {
-              setScriptLoaded(true);
-            }
-          }
+    loadOpenmain(() => {
+      const hiddenOpenmainElement = document.getElementById('hidden-openmain');
+      if (hiddenOpenmainElement) {
+        const openmainDiv = hiddenOpenmainElement.getElementsByTagName('div')[0];
+        if (openmainDiv) {
+          setScriptLoaded(true);
         }
-      });
-    }
-  });
+      }
+    });
+  }, [scriptLoaded]);
 
   return (
     <>
@@ -37,23 +28,28 @@ const NaverOpenmainButton = function({isNaverSection}: PropsType) {
           element.click();
         }
       }}>
-        <div className='flex justify-start items-center'>
-          { (scriptLoaded) ?
-            <Image src="/naver.svg" height={32} width={32} /> :
-            <Image src="/naver-gray.svg" height={32} width={32} />
-          }
-
-        </div>
-        <div className='col-span-4 flex justify-end items-center'>
-          { (scriptLoaded) ?
-            <span>
+        { (scriptLoaded) ?
+          <>
+            <div className='flex justify-start items-center'>
+              <Image src="/naver.svg" height={32} width={32} />
+            </div>
+            <div className='col-span-4 flex justify-end items-center'>
+              <span>
               네이버 메인에&nbsp;<span className='text-green-500'>#실시간검색어</span>&nbsp;추가
-            </span> :
-            <span>
-              <span className='text-gray-500'>네이버 메인에 #실시간검색어 추가</span>
-            </span>
-          }
-        </div>
+              </span>
+            </div>
+          </> :
+          <>
+            <div className='flex justify-start items-center'>
+              <Image src="/naver-gray.svg" height={32} width={32} />
+            </div>
+            <div className='col-span-4 flex justify-end items-center'>
+              <span>
+                <span className='text-gray-500'>네이버 메인에 #실시간검색어 추가</span>
+              </span>
+            </div>
+          </>
+        }
       </div>
     </>
   );
