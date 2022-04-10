@@ -10,7 +10,7 @@ const handler: Handler = async (event, context) => {
 
   await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
     owner: 'realtime-trends',
-    repo: 'realtime-trends-updater',
+    repo: 'data-crawler-python',
     workflow_id: workflowId,
     ref: 'main',
     inputs: {
