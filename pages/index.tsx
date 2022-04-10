@@ -51,20 +51,6 @@ export const getServerSideProps:GetServerSideProps<PropsType> = async ()=> {
     // eslint-disable-next-line max-len
     const latestTimeStamp = Math.max.apply(null, data['timestamps' as keyof object]);
     const trends : Trend[] = data[latestTimeStamp as keyof object];
-    await Promise.all(trends.map(async (trend, index) => {
-      const url = 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=' + encodeURIComponent(trend.keyword);
-      const res = await axios.get(url);
-      const $ = cheerio.load(await res.data);
-      const topArticles : Article[] = $('ul.list_news > li').filter((index) => index < 3).map((_index, item) => {
-        return {
-          title: $(item).find('a.news_tit').attr('title') || '',
-          link: $(item).find('a.news_tit').attr('href') || '',
-          content: $(item).find('a.api_txt_lines.dsc_txt_wrap').text(),
-          thumnail: $(item).find('img.thumb.api_get').attr('src') || '',
-        };
-      }).toArray();
-      trends[index].topArticles = topArticles;
-    }));
     return {
       props: {trends: trends},
     };
