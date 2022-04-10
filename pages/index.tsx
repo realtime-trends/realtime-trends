@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import type {GetServerSideProps, NextPage} from 'next';
 import Head from 'next/head';
 
@@ -10,39 +10,14 @@ import * as cheerio from 'cheerio';
 import {useRouter} from 'next/router';
 import Article from '../models/article';
 import ChartNewsList from '../components/chart-news-list';
+interface PropsType {
+  trends: Trend[]
+}
 
-const Home: NextPage = () => {
-  const [trends, setTrends] = useState<Trend[]>([]);
+
+const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   const router = useRouter();
-
-  useEffect(() => {
-    axios.get('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json').then((res) => {
-      const latestTimeStamp = Math.max.apply(null, res.data['timestamps' as keyof object]);
-      const trends : Trend[] = res.data[latestTimeStamp as keyof object];
-      trends.forEach((trend, index) => {
-        const url = 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=' + encodeURIComponent(trend.keyword);
-        axios.get(url).then((res_) => {
-          const $ = cheerio.load(res_.data);
-          const topArticles : Article[] = $('ul.list_news > li').filter((index) => index < 3).map((_index, item) => {
-            return {
-              title: $(item).find('a.news_tit').attr('title') || '',
-              link: $(item).find('a.news_tit').attr('href') || '',
-              content: $(item).find('a.api_txt_lines.dsc_txt_wrap').text(),
-              thumnail: $(item).find('img.thumb.api_get').attr('src') || '',
-            };
-          }).toArray();
-          trends[index].topArticles = topArticles;
-          setTrends(trends);
-        });
-      });
-    });
-  });
-
   const {napp} = router.query;
-
-  if (!trends) {
-    return (<div>Loading...</div>);
-  }
 
   if (napp && napp == 'mysection') {
     return (
@@ -69,8 +44,35 @@ const Home: NextPage = () => {
   );
 };
 
-// export const getServerSideProps:GetServerSideProps<PropsType> = async ()=> {
-
-// };
+export const getServerSideProps:GetServerSideProps<PropsType> = async ()=> {
+  const res = await axios.get('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json');
+  const data: object = await res.data;
+  if (data) {
+    // eslint-disable-next-line max-len
+    const latestTimeStamp = Math.max.apply(null, data['timestamps' as keyof object]);
+    const trends : Trend[] = data[latestTimeStamp as keyof object];
+    await Promise.all(trends.map(async (trend, index) => {
+      const url = 'https://search.naver.com/search.naver?where=news&sm=tab_jum&query=' + encodeURIComponent(trend.keyword);
+      const res = await axios.get(url);
+      const $ = cheerio.load(await res.data);
+      const topArticles : Article[] = $('ul.list_news > li').filter((index) => index < 3).map((_index, item) => {
+        return {
+          title: $(item).find('a.news_tit').attr('title') || '',
+          link: $(item).find('a.news_tit').attr('href') || '',
+          content: $(item).find('a.api_txt_lines.dsc_txt_wrap').text(),
+          thumnail: $(item).find('img.thumb.api_get').attr('src') || '',
+        };
+      }).toArray();
+      trends[index].topArticles = topArticles;
+    }));
+    return {
+      props: {trends: trends},
+    };
+  } else {
+    return {
+      props: {trends: []},
+    };
+  }
+};
 
 export default Home;
