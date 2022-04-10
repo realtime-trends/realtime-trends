@@ -5,13 +5,5 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[plugins]]
-  package = "@netlify/plugin-sitemap"
-
-  [plugins.inputs]
-  buildDir = ".next"
-  prettyURLs = true
-  trailingSlash = true
-
-[[plugins]]
-  package = "netlify-plugin-submit-sitemap"
+[functions."test-function"]
+  schedule = "*/5 * * * *"
