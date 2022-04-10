@@ -45,7 +45,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
 };
 
 export const getServerSideProps:GetServerSideProps<PropsType> = async ()=> {
-  const res = await axios.get('https://raw.githubusercontent.com/hoyaaaa/realtime-trends-data/main/trends.json');
+  const res = await axios.get('https://raw.githubusercontent.com/realtime-trends/realtime-trends-data/data/trends.json');
   const data: object = await res.data;
   if (data) {
     // eslint-disable-next-line max-len
