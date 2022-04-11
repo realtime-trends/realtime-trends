@@ -14,7 +14,7 @@ class MyDocument extends Document {
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8196967081193084"
-            crossorigin="anonymous"></script>
+            crossOrigin="anonymous"></script>
           <script
             dangerouslySetInnerHTML={{
               __html: `
