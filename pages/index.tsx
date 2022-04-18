@@ -21,7 +21,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
   return (
     <div className='body-bg min-h-screen md:pt-20 pb-6 px-2 md:px-0 pt-12'>
       <Head>
-        <title>#실시간 검색어</title>
+        <title>리얼타임 실시간검색어</title>
         <meta name="description" content="실시간 검색어를 확인합니다." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
