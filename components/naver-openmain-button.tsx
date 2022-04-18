@@ -42,7 +42,7 @@ const NaverOpenmainButton = function({isNaverSection}: PropsType) {
               </div>
               <div className='col-span-4 flex justify-end items-center'>
                 <span>
-                네이버 메인에&nbsp;<span className='text-green-500'>#실시간검색어</span>&nbsp;추가
+                네이버 메인에&nbsp;<span className='text-green-500'>리얼타임 실검</span>&nbsp;추가
                 </span>
               </div>
             </> :
@@ -52,7 +52,7 @@ const NaverOpenmainButton = function({isNaverSection}: PropsType) {
               </div>
               <div className='col-span-4 flex justify-end items-center'>
                 <span>
-                  <span className='text-gray-500'>네이버 메인에 #실시간검색어 추가</span>
+                  <span className='text-gray-300'>네이버 메인에 리얼타임 실검 추가</span>
                 </span>
               </div>
             </>
