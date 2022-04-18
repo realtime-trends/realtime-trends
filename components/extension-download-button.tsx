@@ -13,7 +13,7 @@ const ExtensionDownloadButton = () => {
       </div>
       <div className='col-span-4 flex justify-end items-center'>
         <span>
-          브라우저에&nbsp;<span className='text-red-500'>#실시간검색어</span>&nbsp;설치
+          브라우저에&nbsp;<span className='text-red-500'>리얼타임 실검</span>&nbsp;설치
         </span>
       </div>
     </div>);
