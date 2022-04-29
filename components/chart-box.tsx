@@ -71,7 +71,7 @@ const ChartBox = ({trends, isNaverSection, reload}: PropsType): JSX.Element => {
             }}
           >
             <div className="text-xs font-bold text-gray-400 mb-1">
-              검색엔진
+              검색엔진변경
             </div>
             <Image src={searchEngines[searchEngine].logo} alt={searchEngines[searchEngine].name} width={32} height={32} />
           </div>
