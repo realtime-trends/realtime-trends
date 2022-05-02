@@ -28,15 +28,15 @@ class MyDocument extends Document {
           <script
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-           />
-           <script
+          />
+          <script
             dangerouslySetInnerHTML={{
               __html: `
                 (adsbygoogle = window.adsbygoogle || []).push({
                   google_ad_client: '${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID}',
                   enable_page_level_ads: true
                 });
-              `
+              `,
             }}
           />
         </Head>
