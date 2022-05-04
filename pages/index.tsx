@@ -22,11 +22,11 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
     <div className='body-bg min-h-screen md:pt-20 pb-6 px-2 md:px-0 pt-12'>
       <Head>
         <title>리얼타임 실시간검색어</title>
-        <meta name="description" content="실시간 검색어를 확인합니다." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-        <script async src={"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}
-         crossOrigin="anonymous"></script>
+        <meta name='description' content='실시간 검색어를 확인합니다.' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
+        <script async src={'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}
+          crossOrigin='anonymous'></script>
       </Head>
 
       <main className='bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg md:shadow-2xl my-0 md:my-10'>
