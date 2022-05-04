@@ -25,7 +25,7 @@ const Home: NextPage<PropsType> = ({trends}: PropsType) => {
         <meta name="description" content="실시간 검색어를 확인합니다." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + process.env.NEXT_PUBLIC_GOOGLE_ADSENSE
+        <script async src={"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + process.env.NEXT_PUBLIC_GOOGLE_ADSENSE}
          crossOrigin="anonymous"></script>
       </Head>
 
