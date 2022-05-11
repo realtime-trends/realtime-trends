@@ -9,7 +9,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script src="https://developers.kakao.com/sdk/js/kakao.min.js"/>
-          <meta name="naver-site-verification" content="f8216b279ca39e77bad7ac784ae2a5e475e73739" />
+          <meta name="naver-site-verification" content={process.env.NEXT_PUBLIC_NAVER_SEARCHADVISOR} />
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
