@@ -12,7 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@netlify/functions": "^1.0.0",
-    "@netlify/plugin-nextjs": "^4.3.2",
+    "@netlify/plugin-nextjs": "^4.23.1",
     "@octokit/core": "^3.6.0",
     "axios": "^0.26.1",
     "next": "12.1.4",
